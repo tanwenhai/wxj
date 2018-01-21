@@ -77,7 +77,18 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
+  onShareAppMessage: function (options) {
+    return {
+      title: '要出国游的人注意了……',
+      path: '/pages/detail/index?id=123',
+      success: function (res) {
+        // 转发成功
+        alert('转发成功')
+      },
+      fail: function (res) {
+        // 转发失败
+        alert('转发成功')
+      }
+    }
   }
 })
