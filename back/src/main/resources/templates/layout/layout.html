@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- 引入样式 -->
+  <link href="https://cdn.bootcss.com/minireset.css/0.0.2/minireset.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" th:href="@{/static/css/gm.css}">
+</head>
+<body>
+  <div id="app" >
+    <div th:replace="layout/head :: header"></div>
+    <div class="clearfix">
+      <div class="pull-left">
+        <div th:replace="layout/menu :: menu"></div>
+      </div>
+      <div class="content" layout:fragment="content"></div>
+    </div>
+    <div th:replace="layout/footer :: footer"></div>
+  </div>
+
+<!-- 引入组件库 -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="http://momentjs.com/downloads/moment.min.js"></script>
+<script th:src="@{/static/js/common/utils.js}"></script>
+<script src="/static/js/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+  var defaultVueOptions = {
+    methods: {
+      selectPage: function (index, indexPage) {
+        location.href = index;
+      }
+    },
+    data: {
+      defaultActive: location.pathname
+    }
+  }
+</script>
+<script layout:fragment="script">
+  new Vue($.extend(true, defaultVueOptions, {
+    el: '#app'
+  }));
+</script>
+</body>
+</html>

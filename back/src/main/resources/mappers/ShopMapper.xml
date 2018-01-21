@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mm.mapper.ShopMapper">
+  <resultMap id="BaseResultMap" type="Shop">
+    <id column="id" property="id" jdbcType="INTEGER" javaType="integer"/>
+    <result column="name" property="name" jdbcType="VARCHAR" javaType="string"/>
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" javaType="string"/>
+    <result column="content" property="content" jdbcType="VARCHAR" javaType="string"/>
+    <result column="gmt_create" property="gmtCreate" jdbcType="DATE" javaType="java.util.Date"/>
+    <result column="gmt_modify" property="gmtModify" jdbcType="DATE" javaType="java.util.Date"/>
+  </resultMap>
+
+  <select id="find" resultMap="BaseResultMap">
+    SELECT * FROM shop
+    <where>
+      <if test="name != null and name != ''">
+        name = #{name}
+      </if>
+    </where>
+  </select>
+
+  <select id="findOneById" resultMap="BaseResultMap">
+    SELECT * FROM shop WHERE id = #{id}
+  </select>
+</mapper>

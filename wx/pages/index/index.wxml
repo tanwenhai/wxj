@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="weui-article__h1 title">
+    名店购目的地
+    <view class='weui-article__h1 sub-title'>全球商户</view>
+  </view>
+  <view class="category-container">
+    <view class="category" wx:for="{{categorys}}" wx:key="id">
+      <view class="weui-article__h1">
+        {{item.name}}
+      </view>
+      <view class="category-group">
+        <navigator url="/pages/nav2/index?id={{city.id}}" class="category-item"  wx:for="{{item.citys}}" wx:for-item="city" wx:key="id">
+          {{city.name}}
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>

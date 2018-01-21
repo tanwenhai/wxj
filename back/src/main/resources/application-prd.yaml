@@ -1,0 +1,72 @@
+server:
+#  port: ${random.int[1024,9999]}
+  session-timeout: 1000000
+  context-path: /
+  tomcat.uri-encoding: UTF-8
+  tomcat.compression: on
+  session:
+    cookie:
+      name: SID
+  
+# druid数据源配置
+spring:
+  datasource:
+    druid:
+      host: 127.0.0.1
+      port: 3306
+      url: 'jdbc:mysql://${spring.datasource.druid.host}:${spring.datasource.druid.port}/wx?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&allowMultiQueries=true'
+      username: 'root'
+      password: 'wangxj123'
+      driver-class-name: 'com.mysql.jdbc.Driver'
+      initialSize: 5
+      minIdle: 5
+      maxActive: 10
+      maxWait: 10000
+      validationQuery: SELECT 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      useGlobalDataSourceStat: true
+      filter:
+        stat:
+          enabled: true
+          dbType: mysql
+          logSlowSql: true
+        wall:
+          enabled: true
+        slf4j:
+          enabled: true
+  # thymeleaf
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+  # redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    pool.maxActive: 600
+    pool.maxWait: -1
+    pool.maxIdle: 8
+    pool.minIdle: 1
+  # session
+  session:
+    store-type: fi
+    redis:
+      namespace: gm:session
+  messages:
+    basename: i18n/messages
+  mvc:
+    locale: zh_CN
+# mybatis 配置
+mybatis:
+  mapperLocations: classpath:mappers/**/*.xml
+  configuration:
+    callSettersOnNulls: true
+  type-aliases-package: com.mm.domain.model
+
+management:
+  context-path: /actuator
+  security:
+    enabled: true
+    roles: admin

@@ -1,0 +1,27 @@
+<header xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <div class="navbar navbar-inverse" style="margin: 0; border-radius: 0">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">魔法少女</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="navbar-text" sec:authorize="isAuthenticated()">
+                        <span th:text="#{login.user}">登陆用户</span>: <span sec:authentication="name"></span>
+                    </li>
+                    <li class="navbar-text" sec:authorize="isAuthenticated()">
+                        <span th:text="#{login.role}">角色</span>: <span sec:authentication="principal.authorities"></span>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="#" th:href="@{#}" onclick="$('#form').submit();">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                            <span th:text="#{logout}">退出登陆</span>
+                        </a>
+                        <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/user/logout}"></form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>

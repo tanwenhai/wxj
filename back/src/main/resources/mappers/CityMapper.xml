@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mm.mapper.CityMapper">
+  <resultMap id="BaseResultMap" type="City">
+    <id column="id" property="id" jdbcType="INTEGER" javaType="integer"/>
+    <result column="name" property="name" jdbcType="VARCHAR" javaType="string"/>
+    <result column="gmt_create" property="gmtCreate" jdbcType="DATE" javaType="java.util.Date"/>
+    <result column="gmt_modify" property="gmtModify" jdbcType="DATE" javaType="java.util.Date"/>
+  </resultMap>
+
+  <resultMap id="CityAndShopResultMap" type="com.mm.domain.pojo.CityAndShopPO">
+    <id column="id" property="id" javaType="integer"/>
+    <id column="name" property="name" javaType="string"/>
+    <collection property="shopList" javaType="java.util.Set" ofType="Shop">
+      <result column="shopName" property="name"/>
+      <result column="img_url" property="imgUrl"/>
+      <result column="shopId" property="id"/>
+    </collection>
+  </resultMap>
+
+  <select id="find" resultMap="BaseResultMap">
+    SELECT * FROM city
+    <where>
+      <if test="name != null and name != ''">
+        name = #{name}
+      </if>
+    </where>
+  </select>
+
+  <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="City">
+    INSERT INTO `city`(`name`) VALUE (#{name})
+  </insert>
+
+  <select id="findCityAndShopById" resultMap="CityAndShopResultMap">
+    SELECT
+      ci.id, ci.name, sh.id AS shopId, sh.name AS shopName, sh.img_url
+    FROM
+      city AS ci
+      LEFT JOIN city_shop AS cs ON (ci.id = cs.city_id)
+      LEFT JOIN shop AS sh ON (sh.id = cs.shop_id)
+    WHERE ci.id = #{id}
+  </select>
+</mapper>

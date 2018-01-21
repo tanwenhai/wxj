@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zn-ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>登录</title>
+  <!-- 引入样式 -->
+  <link href="https://cdn.bootcss.com/minireset.css/0.0.2/minireset.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" th:href="@{/static/css/login.css}">
+</head>
+<body>
+  <form class="form-signin" th:action="@{/user/login}" method="post">
+    <div class="text-center mb-4" th:if="${param.error != null}">
+      <div class="alert alert-danger" role="alert" th:text="#{login.error}">
+        无效的用户名或密码
+      </div>
+    </div>
+    <div class="form-label-group">
+      <input type="text" id="username" name="username" class="form-control" placeholder="Email address" required autofocus>
+      <label for="username" th:text="#{login.usernamelabel}">用户名</label>
+    </div>
+    <div class="form-label-group">
+      <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+      <label for="password" th:text="#{login.passwordlabel}">密码</label>
+    </div>
+    <!--<div class="checkbox mb-3">-->
+      <!--<label>-->
+        <!--<input type="checkbox" value="remember-me"> Remember me-->
+      <!--</label>-->
+    <!--</div>-->
+    <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.loginbtn}">登录</button>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; 2018</p>
+  </form>
+<!-- 引入组件库 -->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      username: '',
+      password: ''
+    },
+    methods: {
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    }
+  })
+</script>
+</body>
+</html>

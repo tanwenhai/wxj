@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/layout">
+<head>
+  <title>魔法少女</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <form class="form-inline" @submit.prevent="search">
+    <div class="form-group">
+      <label for="username" th:text="#{loglist.username}">用户名：</label>
+      <input type="text" class="form-control" id="username" th:placeholder="#{loglist.usernameplaceholder}" placeholder="用户名" v-model="username">
+    </div>
+    <button type="submit" class="btn btn-primary" th:text="#{loglist.search}">查询</button>
+  </form>
+
+  <el-table
+      :data="tableData"
+      stripe
+      style="width: 100%">
+    <el-table-column
+        prop="id"
+        label="ID"
+        width="100">
+    </el-table-column>
+    <el-table-column
+        prop="userName"
+        th:attr="label=#{loglist.usernamelabel}"
+        label="用户名">
+    </el-table-column>
+    <el-table-column
+        prop="operationType"
+        th:attr="label=#{loglist.operatetypelabel}"
+        label="操作类型">
+      <template slot-scope="scope">
+        <span style="margin-left: 10px">{{ scope.row.operationType | typeConvert }}</span>
+      </template>
+    </el-table-column>
+    <el-table-column
+        prop="ip"
+        th:attr="label=#{loglist.accessip}"
+        label="访问IP">
+    </el-table-column>
+    <el-table-column
+        prop="path"
+        th:attr="label=#{loglist.accesspath}"
+        label="访问路径">
+    </el-table-column>
+    <el-table-column
+        prop="content"
+        th:attr="label=#{loglist.desclabel}"
+        label="操作描述">
+    </el-table-column>
+    <el-table-column
+        prop="gmtCreate"
+        th:attr="label=#{loglist.createlabel}"
+        label="操作时间"
+        width="180">
+      <template slot-scope="scope">
+        <i class="el-icon-time"></i>
+        <span style="margin-left: 10px">{{ scope.row.gmtCreate | dateFormat }}</span>
+      </template>
+    </el-table-column>
+  </el-table>
+  <div class="pull-right" style="margin-top: 10px">
+    <el-pagination v-if="tableData.length > 0"
+                   @size-change="changePageSize"
+                   @current-change="changeCurrentPage"
+                   :current-page="currentPage"
+                   :page-sizes="pageSizes"
+                   :page-size="pageSize"
+                   layout="total, sizes, prev, pager, next, jumper"
+                   :total="total">
+    </el-pagination>
+  </div>
+</div>
+<script layout:fragment="script" th:src="@{/static/js/loglist.js}"></script>
+</body>
+</html>

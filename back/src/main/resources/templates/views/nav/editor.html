@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/layout">
+<head>
+  <title>魔法少女</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="center-block" style="width: 600px">
+    <el-form ref="form" :model="form" :rules="rules" label-width="80px" size="mini">
+      <el-input type="hidden" v-model="form.id"></el-input>
+      <el-form-item
+          label="分类名" prop="name">
+        <el-input v-model="form.name"></el-input>
+      </el-form-item>
+      <el-form-item
+          label="顺序" prop="sort">
+        <el-input v-model.number="form.sort" placeholder="数字 越大越靠前"></el-input>
+      </el-form-item>
+      <el-form-item
+          label="选择城市" prop="cityIds">
+        <el-checkbox-group v-model="form.cityList">
+          <el-checkbox-button v-for="city in cityList" :label="city.id" :key="city.id">{{city.name}}</el-checkbox-button>
+        </el-checkbox-group>
+      </el-form-item>
+      <el-form-item size="large">
+        <el-button type="primary" @click="add('form')">{{btnText}}</el-button>
+        <el-button @click="resetForm('form')" th:text="#{roleadd.reset}">重置</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
+</div>
+<script layout:fragment="script" th:src="@{/static/js/category/editor.js}"></script>
+</body>
+</html>

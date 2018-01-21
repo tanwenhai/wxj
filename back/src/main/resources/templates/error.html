@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/layout">
+<head>
+  <title>魔法少女</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div>
+    timestamp: <span th:text="${timestamp}"></span>
+  </div>
+  <div>
+    status: <span th:text="${status}"></span>
+  </div>
+  <div>
+    error: <span th:text="${error}"></span>
+  </div>
+  <div>
+    message: <span th:text="${message}"></span>
+  </div>
+  <div>
+    path: <span th:text="${path}"></span>
+  </div>
+  <div th:if="${status} == 403">
+    请联系管理员授权
+  </div>
+</div>
+<script layout:fragment="script" th:src="@{/static/js/permission.js}"></script>
+</body>
+</html>

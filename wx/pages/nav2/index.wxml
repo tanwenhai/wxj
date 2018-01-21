@@ -1,0 +1,11 @@
+<view class="container">
+  <view>
+    <navigator url="/pages/detail/index?id={{item.id}}" wx:for="{{shops}}" wx:key="id">
+      <image class='category-img' src="{{item.imgUrl}}" mode="aspectFill" style="position">
+        <view class='category-center'>
+          <view class='title'>{{item.name}}</view>
+        </view>
+      </image>
+    </navigator>
+  </view>
+</view>

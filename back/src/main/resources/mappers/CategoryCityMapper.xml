@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mm.mapper.CategoryCityMapper">
+  <insert id="batchInsert">
+    INSERT INTO `category_city`(`category_id`, `city_id`) VALUES
+    <foreach collection="records" item="item" open="(" separator="),(" close=")">
+      #{item.categoryId}, #{item.cityId}
+    </foreach>
+  </insert>
+</mapper>

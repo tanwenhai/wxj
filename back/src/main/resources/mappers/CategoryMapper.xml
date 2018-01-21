@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mm.mapper.CategoryMapper">
+  <resultMap id="CategoryAndCityResultMap" type="com.mm.domain.pojo.CategoryAndCityPO">
+    <id column="id" property="id" javaType="integer"/>
+    <id column="name" property="name" javaType="string"/>
+    <id column="sort" property="sort" javaType="integer"/>
+    <collection property="citys" javaType="java.util.Set" ofType="com.mm.domain.model.City">
+      <result column="cityName" property="name"/>
+      <result column="cityId" property="id"/>
+    </collection>
+  </resultMap>
+
+  <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="Category">
+    INSERT INTO `category`(`name`, `sort`) VALUE (#{name}, #{sort})
+  </insert>
+
+  <select id="findCategoryWithCity" resultMap="CategoryAndCityResultMap">
+    SELECT
+      ca.id, ca.name, ca.sort, ci.name AS cityName, ci.id AS cityId
+    FROM
+      category AS ca
+      LEFT JOIN category_city AS cc ON (ca.id = cc.category_id)
+      LEFT JOIN city AS ci ON (ci.id = cc.city_id)
+    <where>
+      <if test="name != null and name != ''">
+        ca.name = #{name}
+      </if>
+    </where>
+    ORDER BY ca.sort DESC
+  </select>
+
+  <select id="findCategoryWithCityById" resultMap="CategoryAndCityResultMap">
+    SELECT
+      ca.id, ca.name, ca.sort, ci.name AS cityName, ci.id AS cityId
+    FROM
+      category AS ca
+      LEFT JOIN category_city AS cc ON (ca.id = cc.category_id)
+      LEFT JOIN city AS ci ON (ci.id = cc.city_id)
+    WHERE ca.id = #{id}
+  </select>
+</mapper>

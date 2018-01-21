@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mm.mapper.CityShopMapper">
+  <insert id="batchInsert">
+    INSERT INTO `city_shop`(`city_id`, `shop_id`) VALUES
+    <foreach collection="records" item="item" open="(" separator="),(" close=")">
+      #{item.cityId}, #{item.shopId}
+    </foreach>
+  </insert>
+</mapper>

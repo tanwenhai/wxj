@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/layout">
+<head>
+  <title>魔法少女</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <form class="form-inline" @submit.prevent="search">
+    <div class="form-group">
+      <label for="rolename" th:text="#{rolelist.rolename}">角色名：</label>
+      <input type="text" class="form-control" id="rolename" th:placeholder="#{rolelist.rolenameplaceholder}" placeholder="角色名" v-model="rolename">
+    </div>
+    <div class="form-group">
+      <label for="username" th:text="#{rolelist.username}">用户名：</label>
+      <input type="text" class="form-control" id="username" th:placeholder="#{rolelist.usernameplaceholder}" placeholder="用户名" v-model="username">
+    </div>
+    <button type="submit" class="btn btn-primary" th:text="#{rolelist.search}">查询</button>
+    <a class="btn btn-success pull-right" th:href="@{/admin/permission/role/add}" th:text="#{rolelist.addrole}">添加角色</a>
+  </form>
+
+  <el-table
+      :data="tableData"
+      stripe
+      style="width: 100%">
+    <el-table-column
+        prop="id"
+        label="ID"
+        width="100">
+    </el-table-column>
+    <el-table-column
+        prop="name"
+        th:attr="label=#{rolelist.rolenamelabel}"
+        label="角色">
+    </el-table-column>
+    <el-table-column
+        prop="desc"
+        th:attr="label=#{rolelist.desclabel}"
+        label="描述">
+    </el-table-column>
+    <el-table-column
+        prop="gmtCreate"
+        th:attr="label=#{rolelist.createlabel}"
+        label="创建时间"
+        width="180">
+      <template slot-scope="scope">
+        <i class="el-icon-time"></i>
+        <span style="margin-left: 10px">{{ scope.row.gmtCreate | dateFormat }}</span>
+      </template>
+    </el-table-column>
+    <el-table-column
+        fixed="right"
+        th:attr="label=#{rolelist.operatelabel}"
+        label="操作"
+        width="180">
+      <template slot-scope="scope">
+        <a v-bind:href="'/admin/permission/user?roleId=' + scope.row.id" th:text="#{rolelist.catuser}">查看用户</a>
+        <a v-bind:href="'/admin/permission/role/modify?roleId=' + scope.row.id" th:text="#{rolelist.editorrole}">编辑</a>
+        <el-button @click="delRole(scope.row.id)" type="text" size="small" th:text="#{rolelist.delrole}">删除</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+  <div class="pull-right" style="margin-top: 10px">
+    <el-pagination v-if="tableData.length > 0"
+                   @size-change="changePageSize"
+                   @current-change="changeCurrentPage"
+                   :current-page="currentPage"
+                   :page-sizes="pageSizes"
+                   :page-size="pageSize"
+                   layout="total, sizes, prev, pager, next, jumper"
+                   :total="total">
+    </el-pagination>
+  </div>
+</div>
+<script layout:fragment="script" th:src="@{/static/js/rolelist.js}"></script>
+</body>
+</html>

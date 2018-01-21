@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/layout">
+<head>
+  <title>魔法少女</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="center-block" style="width: 600px">
+    <el-form ref="form" :model="userForm" :rules="rules" label-width="80px" size="mini">
+      <el-form-item
+          th:attr="label=#{userlist.namelabel}"
+          label="用户名" prop="name">
+        <el-input v-model="userForm.name"></el-input>
+      </el-form-item>
+      <el-form-item
+          th:attr="label=#{useradd.passwordlabel}"
+          label="密码" prop="password">
+        <el-input type="password" v-model="userForm.password"></el-input>
+      </el-form-item>
+      <el-form-item
+          th:attr="label=#{useradd.rolegrouplabel}"
+          label="角色组" prop="roleIdList">
+        <el-checkbox-group v-model="userForm.roleIdList">
+          <el-checkbox v-for="role in roles" :key="role.id" :label="role.id" border>{{role.name}}</el-checkbox>
+        </el-checkbox-group>
+      </el-form-item>
+      <el-form-item size="large">
+        <el-button type="primary" @click="add('form')">添加用户</el-button>
+        <el-button @click="resetForm('form')" th:text="#{useradd.reset}">重置</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
+
+</div>
+<script layout:fragment="script" th:src="@{/static/js/useradd.js}"></script>
+</body>
+</html>

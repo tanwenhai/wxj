@@ -1,0 +1,30 @@
+/* pages/nav2/index.wxss */
+.category-img {
+  position: relative;
+  height: 200px;
+  width: 100%;
+}
+
+.category-img .category-center {
+  position:absolute;
+  z-index:1000;
+  background:rgba(0, 0, 0, .7);
+  padding:10px 30px;
+  border:3px solid #fff;
+  color:#fff;
+  transform:translate(-50%, -50%);
+  top:50%;
+  left:50%;
+  width:50%;
+  height: 60px;
+}
+
+.category-center .title {
+  text-align:center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: .8rem;
+  height: 60px;
+  line-height: 60px;
+}
