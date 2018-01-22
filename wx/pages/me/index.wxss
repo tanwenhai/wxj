@@ -1,0 +1,13 @@
+/* pages/me.wxss */
+.nav-image {
+  height: 150px;
+}
+.qrcode {
+  float:left;
+  width:150px;
+  height:150px;
+}
+
+.weui-footer {
+  margin-top: 20px;
+}

@@ -1,0 +1,19 @@
+<!--pages/me.wxml-->
+<view>
+  <image class='nav-image' src="/images/bg.jpg"></image>
+  <view>
+    <image class="qrcode" src='/images/qrcode.png'></image>
+    <text>公众号“XXXX”，专注于海外自由行的优惠促销信息收集和发布，旅游攻略等。关注走啦，说走就走啦</text>
+  </view>
+  <view class="weui-footer">
+    <view class="weui-footer__text">
+      Email 405930558@qq.com
+    </view>
+    <view class="weui-footer__text">
+      微信 juzishuijin
+    </view>
+    <view class="weui-footer__text">
+      手机 18516028648
+    </view>
+  </view>
+</view>

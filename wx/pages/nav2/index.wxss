@@ -28,3 +28,13 @@
   height: 60px;
   line-height: 60px;
 }
+
+.footer-btn-link {
+  height:2rem;
+  line-height:2rem;
+  background:#32B5FC;
+  margin:0 auto;
+  padding:.2rem .5rem;
+  color:#fff;
+  font-size:1.2rem;
+}

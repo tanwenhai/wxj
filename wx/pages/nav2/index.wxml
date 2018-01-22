@@ -8,4 +8,11 @@
       </image>
     </navigator>
   </view>
+  <view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-footer__links">
+        <navigator url="/pages/me/index" class="weui-footer__link footer-btn-link">联系我们</navigator>
+    </view>
+    <view class="button-sp-area">
+    </view>
+  </view>
 </view>

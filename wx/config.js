@@ -1,4 +1,4 @@
-const host = 'http://localhost:8080';
+const host = 'http://106.14.142.110';
 
 const config = {
     service: {
