@@ -70,8 +70,8 @@ new Vue($.extend(true, defaultVueOptions, {
     tableData: [],
     total: 0,
     currentPage: 1,
-    pageSizes: [1, 2, 3, 30],
-    pageSize: 1
+    pageSizes: pageSizes,
+    pageSize: getPageSize()
   },
   mounted: function () {
     this.search();
@@ -88,7 +88,10 @@ new Vue($.extend(true, defaultVueOptions, {
     }
   },
   watch: {
-    pageSize: methods.search,
+    pageSize: function (value) {
+      setPageSize(value);
+      this.search();
+    },
     currentPage: methods.search
   }
 }));

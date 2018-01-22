@@ -32,6 +32,16 @@
 <script src="/static/js/vue.js"></script>
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script>
+  var pageSizes = [10, 15, 20, 30];
+  var pageSize = 10;
+  function getPageSize () {
+    return localStorage.getItem('pageSize') || pageSize;
+  }
+
+  function setPageSize (value) {
+    localStorage.setItem('pageSize', value);
+  }
+
   var defaultVueOptions = {
     methods: {
       selectPage: function (index, indexPage) {
