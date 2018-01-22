@@ -1,4 +1,4 @@
-//index.js
+const config = require('../../config.js');
 //获取应用实例
 const app = getApp()
 
@@ -14,7 +14,7 @@ Page({
   },
   onReady: function (e) {
     wx.request({
-      url: 'http://localhost:8080/api/category/search',
+      url: `${config.service.host}/api/category/search`,
       data: {
         pageNo: 1,
         pageSize: 999

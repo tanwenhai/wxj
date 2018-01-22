@@ -1,5 +1,5 @@
-const WxParse = require('../../wxParse/wxParse.js');
-var article = '<div>我是HTML代码</div>';
+const WxParse = require('../../vendor/wxParse/wxParse.js');
+const config = require('../../config.js');
 
 // pages/nav2/index.js
 Page({
@@ -19,7 +19,7 @@ Page({
     
     let id = options.id;
     wx.request({
-      url: 'http://localhost:8080/api/shop/detail',
+      url: `${config.service.host}/api/shop/detail`,
       data: {
         id
       },

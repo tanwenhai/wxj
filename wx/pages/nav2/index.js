@@ -1,4 +1,4 @@
-// pages/nav2/index.js
+const config = require('../../config.js');
 Page({
 
   /**
@@ -14,7 +14,7 @@ Page({
   onLoad: function (options) {
     let id = options.id;
     wx.request({
-      url: 'http://localhost:8080/api/city/detail',
+      url: `${config.service.host}/api/city/detail`,
       data: {
         id
       },
