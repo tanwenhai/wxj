@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+
 export default class NavList extends Component {
-  render () {
+  render() {
     return (
       <div>
       list
-    </div>
+      </div>
     );
   }
-};
+}

@@ -1,5 +1,5 @@
 export default {
   namespace: 'nav',
-  
-  state: {},
+  state: {
+  },
 };
