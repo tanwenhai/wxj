@@ -70,3 +70,7 @@ management:
   security:
     enabled: true
     roles: admin
+
+static:
+  resource:
+    host: http://localhost:8080

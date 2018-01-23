@@ -79,7 +79,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("wxj").password("123456").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("wxj").password("123456").roles("admin");
     }
 
     /**

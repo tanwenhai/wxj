@@ -37,11 +37,6 @@ spring:
           enabled: true
         slf4j:
           enabled: true
-  # thymeleaf
-  thymeleaf:
-    cache: false
-    mode: LEGACYHTML5
-  # redis
   redis:
     host: 127.0.0.1
     port: 6379
@@ -49,11 +44,12 @@ spring:
     pool.maxWait: -1
     pool.maxIdle: 8
     pool.minIdle: 1
-  # session
+  # thymeleaf
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
   session:
-    store-type: fi
-    redis:
-      namespace: gm:session
+    store-type: redis
   messages:
     basename: i18n/messages
   mvc:
@@ -70,3 +66,8 @@ management:
   security:
     enabled: true
     roles: admin
+
+
+static:
+  resource:
+    host: http://p2y7wdxfv.bkt.clouddn.com
