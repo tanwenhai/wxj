@@ -9,12 +9,15 @@ import ja from 'react-intl/locale-data/ja';
 import { getRouterData } from './common/router';
 import Authorized from './utils/Authorized';
 import styles from './index.less';
-import localeModel from './models/locale';
 
 addLocaleData([...zh, ...ja]);
 
 const ConnectIntlProvider = connect((state) => {
-  return state.locale;
+  return {
+    locale: state.global.locale,
+    messages: state.global.messages,
+    defaultLocale: state.global.defaultLocale,
+  };
 })(IntlProvider);
 
 const { ConnectedRouter } = routerRedux;
@@ -24,8 +27,6 @@ dynamic.setDefaultLoadingComponent(() => {
 });
 
 function RouterConfig({ history, app }) {
-  app.model(localeModel);
-
   const routerData = getRouterData(app);
   const UserLayout = routerData['/user'].component;
   const BasicLayout = routerData['/'].component;

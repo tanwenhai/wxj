@@ -7,7 +7,7 @@ import styles from './index.less';
 const globalFooter = ({ className, links, copyright, dispatch }) => {
   const changeLocale = ({ key }) => {
     dispatch({
-      type: 'locale/changeLocale',
+      type: 'global/changeLocale',
       payload: {
         locale: key,
       },
