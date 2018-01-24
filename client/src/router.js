@@ -14,7 +14,6 @@ import localeModel from './models/locale';
 addLocaleData([...zh, ...ja]);
 
 const ConnectIntlProvider = connect((state) => {
-  console.log(state.locale);
   return state.locale;
 })(IntlProvider);
 
