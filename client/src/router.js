@@ -1,11 +1,22 @@
 import React from 'react';
 import { routerRedux, Switch } from 'dva/router';
-import { LocaleProvider, Spin } from 'antd';
-import jaJP from 'antd/lib/locale-provider/ja_JP';
+import { Spin } from 'antd';
 import dynamic from 'dva/dynamic';
+import { connect } from 'dva';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import zh from 'react-intl/locale-data/zh';
+import ja from 'react-intl/locale-data/ja';
 import { getRouterData } from './common/router';
 import Authorized from './utils/Authorized';
 import styles from './index.less';
+import localeModel from './models/locale';
+
+addLocaleData([...zh, ...ja]);
+
+const ConnectIntlProvider = connect((state) => {
+  console.log(state.locale);
+  return state.locale;
+})(IntlProvider);
 
 const { ConnectedRouter } = routerRedux;
 const { AuthorizedRoute } = Authorized;
@@ -14,11 +25,13 @@ dynamic.setDefaultLoadingComponent(() => {
 });
 
 function RouterConfig({ history, app }) {
+  app.model(localeModel);
+
   const routerData = getRouterData(app);
   const UserLayout = routerData['/user'].component;
   const BasicLayout = routerData['/'].component;
   return (
-    <LocaleProvider locale={jaJP}>
+    <ConnectIntlProvider>
       <ConnectedRouter history={history}>
         <Switch>
           <AuthorizedRoute
@@ -34,7 +47,7 @@ function RouterConfig({ history, app }) {
           />
         </Switch>
       </ConnectedRouter>
-    </LocaleProvider>
+    </ConnectIntlProvider>
   );
 }
 
